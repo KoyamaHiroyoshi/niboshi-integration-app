@@ -1,5 +1,5 @@
 ## WEBアプリ実行
 - npm install -g @angular/cli
-- cd anglar-app
+- cd angular-app
 - npm install
 - ng serve
