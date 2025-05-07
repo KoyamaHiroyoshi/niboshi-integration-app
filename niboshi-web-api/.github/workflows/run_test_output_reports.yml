@@ -1,0 +1,53 @@
+# Workflowの名前
+name: Run JUnit
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop, master]
+
+jobs:
+  # build job
+  build:
+    # Runnerを指定
+    runs-on: ubuntu-latest
+    # Step
+    steps:
+      # RunnnerにGitリポジトリのコピーをダウンロード
+      - uses: actions/checkout@v4
+      # Java 17をセットアップ
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          cache: maven
+      # DBセットアップ
+      - name: Set up Postgres
+        run: docker-compose -f docker-compose.yml up -d db
+      # maven build
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots -am -pl interfaces package -DskipTests -e
+      # Test実行
+      - name: Test with Maven
+        run: mvn --batch-mode test jacoco:report-aggregate
+      # jacocoレポート出力
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: report-aggregator/target/site/jacoco-aggregate
+          retention-days: 30
+      # allureレポート集計
+      - name: Aggregate allure reports
+        run: sh libs/scripts/aggregate_allure_results.sh
+      # allureレポート作成
+      - name: Output allure reports
+        run: mvn allure:report -f ./report-aggregator
+      # allureレポート出力
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-report
+          path: report-aggregator/target/site/allure-maven-plugin
+          retention-days: 30

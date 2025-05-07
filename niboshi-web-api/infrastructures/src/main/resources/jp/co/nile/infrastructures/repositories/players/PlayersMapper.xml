@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.nile.infrastructures.repositories.players.PlayersMapper">
+  <insert id="createPlayers">
+    INSERT INTO players (id, name) VALUES
+    <foreach collection="newPlayers" item="newPlayer" separator=",">
+      (#{newPlayer.id}, #{newPlayer.name})
+    </foreach>
+  </insert>
+
+  <select id="selectAllPlayers" resultType="jp.co.nile.infrastructures.repositories.players.PlayerEntity">
+    SELECT id, name FROM players ORDER BY created_at ASC
+  </select>
+
+  <select id="selectPlayerById" resultType="jp.co.nile.infrastructures.repositories.players.PlayerEntity">
+    SELECT id, name FROM players WHERE id = #{playerId}
+  </select>
+
+  <select id="selectPlayersById" resultType="jp.co.nile.infrastructures.repositories.players.PlayerEntity">
+    SELECT id, name FROM players WHERE id IN
+    <foreach collection="playerIds" item="playerId" open="(" close=")" separator=",">
+      #{playerId}
+    </foreach>
+  </select>
+
+  <update id="updatePlayer">
+    UPDATE players SET name = #{playerName} WHERE id = #{playerId}
+  </update>
+
+  <delete id="deletePlayers">
+    DELETE FROM players WHERE id IN
+    <foreach collection="playerIds" item="playerId" open="(" close=")" separator=",">
+      #{playerId}
+    </foreach>
+  </delete>
+</mapper> 

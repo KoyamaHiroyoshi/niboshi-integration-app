@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Spring Boot が用意しているデフォルト設定を読み込む -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <property name="LOG_MAX_HISTORY" value="14" scope="context" />
+    <property name="LOG_FILE_NAME" value="application-stg" scope="context" />
+    <property name="LOG_FILE_DIR" value="logs" scope="context" />
+
+    <property name="pid" value="${PID}" scope="context" />
+    <property name="LOG_FORMAT" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level ${PID} --- [%thread] %logger{36} : %msg%n" />
+
+    <!-- コンソール出力 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_FORMAT}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- アプリケーションログ出力 -->
+    <appender name="application_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_DIR}/${LOG_FILE_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_DIR}/${LOG_FILE_NAME}_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_FORMAT}</pattern>
+        </encoder>
+    </appender>
+
+    <!--ルートロガー -->
+    <root level="INFO">
+        <appender-ref ref="console" />
+        <appender-ref ref="application_log" />
+    </root>
+</configuration>
