@@ -1,5 +1,57 @@
-node_modules
-.angular
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+!.vscode/extensions.json
+!.vscode/tasks.json
+
+### Code Visualizer ###
+sit-cv-app-1.0.0-beta.5-exec.jar
+
+### docker database ###
+docker/db/data/
+
+### docker schemaspy ###
+**/schemaspy/output/
+
+### 環境変数 ###
 .env
+
+### ログ ###
+logs/
+
+### allure ###
+.allure/
+allure-results/
+
+### mac ###
 .DS_Store
-.vscode

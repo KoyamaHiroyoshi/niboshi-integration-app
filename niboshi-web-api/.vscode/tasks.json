@@ -1,0 +1,205 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // コードのコンパイルと全体のフォーマット
+      "label": "compile-and-format",
+      "type": "shell",
+      "osx": {
+        "command": "./mvnw"
+      },
+      "windows": {
+        "command": ".\\mvnw"
+      },
+      "args": ["compile"],
+      "problemMatcher": []
+    },
+    {
+      // local Docker上のPostgresを起動する
+      "label": "up-database",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["up", "-d", "db"],
+      "problemMatcher": []
+    },
+    {
+      // docker-composeビルド
+      "label": "build-docker-compose",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["build"],
+      "problemMatcher": []
+    },
+    {
+      // local Docker上のPostgresとnileを起動する
+      "label": "up-app-database",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["up", "-d"],
+      "dependsOn": ["build-docker-compose"],
+      "problemMatcher": []
+    },
+    {
+      // Schemaspyを実行する
+      "label": "run-schemaspy",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "-v",
+        "$PWD/schemaspy/output:/output",
+        "-v",
+        "$PWD/schemaspy/schemaspy.properties:/schemaspy.properties",
+        "--rm",
+        "--net='host'",
+        "schemaspy/schemaspy:latest",
+        "--platform linux/amd64"
+      ],
+      "problemMatcher": []
+    },
+    {
+      // Schemaspyの実行結果を開く
+      "label": "open-schemaspy",
+      "type": "shell",
+      "osx": {
+        "command": "open"
+      },
+      "windows": {
+        "command": "start"
+      },
+      "args": ["$PWD/schemaspy/output/index.html"],
+      "problemMatcher": []
+    },
+    {
+      // OpenAPI仕様書のフォーマットをチェックする
+      "label": "openapi-lint",
+      "type": "shell",
+      "command": "spectral",
+      "args": [
+        "lint",
+        "$PWD/interfaces/openapi/nile-openapi.yaml",
+        "--ruleset",
+        "$PWD/interfaces/openapi/.spectral.yaml"
+      ],
+      "problemMatcher": []
+    },
+    {
+      // 単体テストをカバレッジ付きで実行する
+      "label": "run-test-with-coverage-UT",
+      "type": "shell",
+      "osx": {
+        "command": "./mvnw"
+      },
+      "windows": {
+        "command": ".\\mvnw"
+      },
+      "args": ["clean", "test", "-Dgroups=UnitTest", "jacoco:report-aggregate"],
+      "problemMatcher": []
+    },
+    {
+      // 単体テストをカバレッジ付きで実行し、結果を表示する
+      "label": "run-test-and-open-coverage-UT",
+      "type": "shell",
+      "command": "open",
+      "args": [
+        "$PWD/report-aggregator/target/site/jacoco-aggregate/index.html"
+      ],
+      "dependsOn": ["run-test-with-coverage-UT"],
+      "problemMatcher": []
+    },
+    {
+      // 単体テストをカバレッジ・テストレポート付きで実行し、結果を集計する
+      "label": "aggregate-allure-reports-UT",
+      "type": "shell",
+      "command": "sh libs/scripts/aggregate_allure_results.sh",
+      "dependsOn": ["run-test-and-open-coverage-UT"],
+      "problemMatcher": []
+    },
+    {
+      // 単体テストをカバレッジ・テストレポート付きで実行し、結果を表示する
+      "label": "run-test-allure-serve-UT",
+      "type": "shell",
+      "command": "./mvnw allure:serve -f ./report-aggregator",
+      "dependsOn": ["aggregate-allure-reports-UT"],
+      "problemMatcher": []
+    },
+    {
+      // 結合テストをカバレッジ付きで実行する
+      "label": "run-test-with-coverage-IT",
+      "type": "shell",
+      "osx": {
+        "command": "./mvnw"
+      },
+      "windows": {
+        "command": ".\\mvnw"
+      },
+      "args": [
+        "clean",
+        "test",
+        "-Dgroups=IntegrationTest",
+        "jacoco:report-aggregate"
+      ],
+      "problemMatcher": []
+    },
+    {
+      // 結合テストをカバレッジ付きで実行し、結果を表示する
+      "label": "run-test-and-open-coverage-IT",
+      "type": "shell",
+      "command": "open",
+      "args": [
+        "$PWD/report-aggregator/target/site/jacoco-aggregate/index.html"
+      ],
+      "dependsOn": ["run-test-with-coverage-IT"],
+      "problemMatcher": []
+    },
+    {
+      // 結合テストをカバレッジ・テストレポート付きで実行し、結果を集計する
+      "label": "aggregate-allure-reports-IT",
+      "type": "shell",
+      "command": "sh libs/scripts/aggregate_allure_results.sh",
+      "dependsOn": ["run-test-and-open-coverage-IT"],
+      "problemMatcher": []
+    },
+    {
+      // 結合テストをカバレッジ・テストレポート付きで実行し、結果を表示する
+      "label": "run-test-allure-serve-IT",
+      "type": "shell",
+      "command": "./mvnw allure:serve -f ./report-aggregator",
+      "dependsOn": ["aggregate-allure-reports-IT"],
+      "problemMatcher": []
+    },
+    {
+      // テストのカバレッジを表示する
+      "label": "open-coverage",
+      "type": "shell",
+      "command": "open",
+      "args": [
+        "$PWD/report-aggregator/target/site/jacoco-aggregate/index.html"
+      ],
+      "problemMatcher": []
+    },
+    {
+      // ローカル向けビルドを実行する
+      "label": "build-for-local",
+      "type": "shell",
+      "command": "./mvnw clean package",
+      "problemMatcher": []
+    },
+    {
+      // DEV向けビルドを実行する
+      "label": "build-for-dev",
+      "type": "shell",
+      "command": "./mvnw clean package -Pdev -DskipTests=true",
+      "problemMatcher": []
+    },
+    {
+      // STG向けビルドを実行する
+      "label": "build-for-stg",
+      "type": "shell",
+      "command": "./mvnw clean package -Pstg -DskipTests=true",
+      "problemMatcher": []
+    }
+  ]
+}

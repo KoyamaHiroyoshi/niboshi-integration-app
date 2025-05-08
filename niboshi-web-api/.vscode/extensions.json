@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "vscjava.vscode-lombok",
+    "redhat.java",
+    "vscjava.vscode-spring-boot-dashboard",
+    "vmware.vscode-spring-boot",
+    "pleiades.java-extension-pack-jdk"
+  ]
+}
