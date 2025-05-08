@@ -1,0 +1,163 @@
+openapi: 3.0.3
+info:
+  title: NiboshiWebApi定義
+  description: |-
+    NiboshiWebApiサーバーのAPI定義
+  contact:
+    email: example@example.com
+  version: 1.0.0
+servers:
+  - url: https://localhost:8080
+tags:
+  - name: employees
+    description: 従業員関連API
+paths:
+  # 従業員関連API
+  /employees:
+    post:
+      tags:
+        - employees
+      summary: 従業員登録
+      description: 従業員を新規登録する
+      operationId: createEmployees
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEmployeesRequest"
+        required: true
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid request
+    get:
+      tags:
+        - employees
+      summary: 従業員一覧取得
+      description: 登録されている従業員の一覧を取得する
+      operationId: findAllEmployees
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employees"
+        "400":
+          description: Invalid request
+
+  /employees/{employeeId}:
+    get:
+      tags:
+        - employees
+      summary: 従業員取得
+      description: 指定した従業員の情報を取得する
+      operationId: findEmployee
+      parameters:
+        - name: employeeId
+          in: path
+          description: 従業員ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employee"
+        "400":
+          description: Invalid request
+        "404":
+          description: Employee not found
+    put:
+      tags:
+        - employees
+      summary: 従業員更新
+      description: 指定した従業員の情報を更新する
+      operationId: updateEmployee
+      parameters:
+        - name: employeeId
+          in: path
+          description: 従業員ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateEmployeeRequest"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid request
+        "404":
+          description: Employee not found
+    delete:
+      tags:
+        - employees
+      summary: 従業員削除
+      description: 指定した従業員の情報を削除する
+      operationId: deleteEmployee
+      parameters:
+        - name: employeeId
+          in: path
+          description: 従業員ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid request
+        "404":
+          description: Employee not found
+
+components:
+  schemas:
+    ########### 従業員関連スキーマ ###########
+    Employee:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+
+    CreateEmployeeParams:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
+    CreateEmployeesRequest:
+      type: object
+      required:
+        - employees
+      properties:
+        employees:
+          type: array
+          items:
+            $ref: "#/components/schemas/CreateEmployeeParams"
+    UpdateEmployeeRequest:
+      $ref: "#/components/schemas/CreateEmployeeParams"
+
+    Employees:
+      type: object
+      required:
+        - employees
+      properties:
+        employees:
+          type: array
+          items:
+            $ref: "#/components/schemas/Employee"

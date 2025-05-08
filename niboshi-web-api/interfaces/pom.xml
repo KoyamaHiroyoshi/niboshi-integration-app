@@ -3,15 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>jp.co.nile</groupId>
-		<artifactId>nile</artifactId>
+		<groupId>jp.co.niboshi</groupId>
+		<artifactId>niboshi</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>nile-interfaces</artifactId>
+	<artifactId>niboshi-interfaces</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>nile-interfaces</name>
-	<description>nile interfaces</description>
+	<name>niboshi-interfaces</name>
+	<description>niboshi interfaces</description>
 	<properties>
 		<jakarta-servlet.version>5.0.0</jakarta-servlet.version>
 	</properties>
@@ -30,16 +30,16 @@
 			<version>3.1.3</version>
 		</dependency>
 		<dependency>
-			<groupId>jp.co.nile</groupId>
-			<artifactId>nile-applications</artifactId>
+			<groupId>jp.co.niboshi</groupId>
+			<artifactId>niboshi-applications</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<!-- interfaces は infrastructures への依存は本来必要ないがDIの都合上必要
 		scope を runtime のみに設定することで interfaces から infrastructures を呼び出すことを抑制する -->
 		<dependency>
-			<groupId>jp.co.nile</groupId>
-			<artifactId>nile-infrastructures</artifactId>
+			<groupId>jp.co.niboshi</groupId>
+			<artifactId>niboshi-infrastructures</artifactId>
 			<version>${project.version}</version>
 			<scope>runtime</scope>
 		</dependency>
@@ -105,7 +105,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/openapi/nile-openapi.yaml</inputSpec>
+							<inputSpec>${project.basedir}/openapi/niboshi-web-openapi.yaml</inputSpec>
 							<generatorName>spring</generatorName>
 							<configOptions>
 								<sourceFolder>src/gen/java/main</sourceFolder>

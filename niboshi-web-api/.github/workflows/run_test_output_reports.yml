@@ -15,11 +15,11 @@ jobs:
     steps:
       # RunnnerにGitリポジトリのコピーをダウンロード
       - uses: actions/checkout@v4
-      # Java 17をセットアップ
-      - name: Set up JDK 17
+      # Java 21をセットアップ
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: "17"
+          java-version: "21"
           distribution: "temurin"
           cache: maven
       # DBセットアップ

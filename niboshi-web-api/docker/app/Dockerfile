@@ -1,5 +1,5 @@
 # ベースイメージの指定
-FROM amazoncorretto:17
+FROM amazoncorretto:21
 
 # ワーキングディレクトリの設定
 WORKDIR /app
