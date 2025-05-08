@@ -8,7 +8,7 @@ WORKDIR /app
 COPY /interfaces/target/*.war app.war
 
 # ポートの公開
-EXPOSE 8081
+EXPOSE 8082
 
 # アプリケーションの実行コマンド
 ENTRYPOINT ["java", "-jar", "app.war"]

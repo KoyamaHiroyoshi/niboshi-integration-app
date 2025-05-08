@@ -33,7 +33,7 @@
       "problemMatcher": []
     },
     {
-      // local Docker上のPostgresとnileを起動する
+      // local Docker上のPostgresとNiboshiを起動する
       "label": "up-app-database",
       "type": "shell",
       "command": "docker-compose",
@@ -79,7 +79,7 @@
       "command": "spectral",
       "args": [
         "lint",
-        "$PWD/interfaces/openapi/nile-openapi.yaml",
+        "$PWD/interfaces/openapi/niboshi-web-openapi.yaml",
         "--ruleset",
         "$PWD/interfaces/openapi/.spectral.yaml"
       ],

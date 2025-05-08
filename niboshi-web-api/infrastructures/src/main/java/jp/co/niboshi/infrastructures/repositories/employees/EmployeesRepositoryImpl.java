@@ -1,7 +1,6 @@
 package jp.co.niboshi.infrastructures.repositories.employees;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +24,7 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
     List<EmployeeEntity> newEmployees = createEmployeesParams.stream()
         .map(createEmployeeParams -> new EmployeeEntity(new EmployeeId().getUuid(),
             createEmployeeParams.getEmployeeName().toString()))
-        .collect(Collectors.toList());
+        .toList();
     employeesMapper.createEmployees(newEmployees);
   }
 
@@ -33,7 +32,7 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
   public List<Employee> findAllEmployees() throws DomainModelException {
     return employeesMapper.selectAllEmployees().stream().map(
         employeesConverter::toEmployee)
-        .collect(Collectors.toList());
+        .toList();
   }
 
   @Override
@@ -50,7 +49,7 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
   @Override
   public void deleteEmployees(List<EmployeeId> deleteEmployeeIds) {
     employeesMapper.deleteEmployees(
-        deleteEmployeeIds.stream().map(NiboshiUuid::getUuid).collect(Collectors.toList()));
+        deleteEmployeeIds.stream().map(NiboshiUuid::getUuid).toList());
   }
 
   @Override

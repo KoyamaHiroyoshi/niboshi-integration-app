@@ -1,0 +1,32 @@
+version: "3"
+services:
+  api:
+    container_name: niboshi-web-api
+    tty: true
+    ports:
+      - 8082:8082
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    depends_on:
+      - db
+    environment:
+      - spring.datasource.url=jdbc:postgresql://db:5432/niboshi_db
+      - spring.datasource.username=postgres
+      - spring.datasource.password=postgres
+      - spring.datasource.driverClassName=org.postgresql.Driver
+
+  db:
+    image: postgres:15.2
+    container_name: niboshi-db
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "niboshi_db"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5433:5432"
+    volumes:
+      - "./docker/db/data:/var/lib/postgresql/data"
+      - "./docker/db/initdb:/docker-entrypoint-initdb.d"
