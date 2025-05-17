@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './self-evaluation.component.css'
 })
 export class SelfEvaluationComponent {
-
+  title = 'app-self-evaluation';
 }
