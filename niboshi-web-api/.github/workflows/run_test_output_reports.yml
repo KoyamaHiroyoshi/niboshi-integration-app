@@ -24,7 +24,7 @@ jobs:
           cache: maven
       # DBセットアップ
       - name: Set up Postgres
-        run: docker-compose -f docker-compose.yml up -d db
+        run: docker compose -f docker-compose.yml up -d db
       # maven build
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots -am -pl interfaces package -DskipTests -e

@@ -20,24 +20,24 @@
       // local Docker上のPostgresを起動する
       "label": "up-database",
       "type": "shell",
-      "command": "docker-compose",
-      "args": ["up", "-d", "db"],
+      "command": "docker",
+      "args": ["compose", "up", "-d", "db"],
       "problemMatcher": []
     },
     {
       // docker-composeビルド
       "label": "build-docker-compose",
       "type": "shell",
-      "command": "docker-compose",
-      "args": ["build"],
+      "command": "docker",
+      "args": ["compose", "build"],
       "problemMatcher": []
     },
     {
       // local Docker上のPostgresとNiboshiを起動する
       "label": "up-app-database",
       "type": "shell",
-      "command": "docker-compose",
-      "args": ["up", "-d"],
+      "command": "docker",
+      "args": ["compose", "up", "-d"],
       "dependsOn": ["build-docker-compose"],
       "problemMatcher": []
     },
