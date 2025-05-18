@@ -1,6 +1,6 @@
 ## WEBアプリ実行
 - npm install -g @angular/cli
-- cd angular-app
+- cd niboshi-web-app
 - npm install
 - ng serve
 
