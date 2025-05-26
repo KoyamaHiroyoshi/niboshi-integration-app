@@ -21,3 +21,4 @@ describe('AppLayoutFooterComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
