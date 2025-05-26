@@ -12,3 +12,9 @@
 ### Docker起動Ver
 - niboshi-web-api配下の.env.template を.envとしてコピー
 - VSCodeタスクから「up-app-database」を実行
+
+### コンポーネント作成
+- ng generate component xxxxxxxxxxx
+
+### サービス作成
+- ng generate service xxxxxxxxxxx
