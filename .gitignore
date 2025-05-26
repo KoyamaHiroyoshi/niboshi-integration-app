@@ -38,7 +38,7 @@ build/
 sit-cv-app-1.0.0-beta.5-exec.jar
 
 ### docker database ###
-docker/db/data/
+**/docker/db/data/
 
 ### docker schemaspy ###
 **/schemaspy/output/
