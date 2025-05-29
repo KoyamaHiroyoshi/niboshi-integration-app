@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { SendApiService } from '../../service/send-api.service';
+import { AppLayoutHeaderComponent } from '../../layout/app-layout-header/app-layout-header.component';
+import { AppLayoutFooterComponent } from '../../layout/app-layout-footer/app-layout-footer.component';
+
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [AppLayoutHeaderComponent, AppLayoutFooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

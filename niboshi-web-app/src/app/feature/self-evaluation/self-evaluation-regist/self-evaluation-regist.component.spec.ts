@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelfEvaluation02Component } from './self-evaluation-02.component';
+import { SelfEvaluationrRegistComponent } from './self-evaluation-regist.component';
 
 describe('SelfEvaluation02Component', () => {
-  let component: SelfEvaluation02Component;
-  let fixture: ComponentFixture<SelfEvaluation02Component>;
+  let component: SelfEvaluationrRegistComponent;
+  let fixture: ComponentFixture<SelfEvaluationrRegistComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelfEvaluation02Component]
+      imports: [SelfEvaluationrRegistComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SelfEvaluation02Component);
+    fixture = TestBed.createComponent(SelfEvaluationrRegistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
