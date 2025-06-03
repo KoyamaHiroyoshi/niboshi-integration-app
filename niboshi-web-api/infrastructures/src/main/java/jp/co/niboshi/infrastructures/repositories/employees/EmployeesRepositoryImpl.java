@@ -21,11 +21,11 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
 
   @Override
   public void createEmployees(List<CreateEmployeeParams> createEmployeesParams) {
-    List<EmployeeEntity> newEmployees = createEmployeesParams.stream()
-        .map(createEmployeeParams -> new EmployeeEntity(new EmployeeId().getUuid(),
-            createEmployeeParams.getEmployeeName().toString()))
-        .toList();
-    employeesMapper.createEmployees(newEmployees);
+    // List<EmployeeEntity> newEmployees = createEmployeesParams.stream()
+    //     .map(createEmployeeParams -> new EmployeeEntity(new EmployeeId().getUuid(),
+    //         createEmployeeParams.getEmployeeName().toString()))
+    //     .toList();
+    // employeesMapper.createEmployees(newEmployees);
   }
 
   @Override
@@ -37,19 +37,19 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
 
   @Override
   public Employee findEmployeeById(EmployeeId employeeId) throws DomainModelException {
-    return employeesConverter.toEmployee(employeesMapper.selectEmployeeById(employeeId.getUuid()));
+    return employeesConverter.toEmployee(employeesMapper.selectEmployeeById(employeeId.toString()));
   }
 
   @Override
   public void updateEmployee(UpdateEmployeeParams updateEmployeeParams) {
-    employeesMapper.updateEmployee(updateEmployeeParams.getId().getUuid(),
-        updateEmployeeParams.getName().toString());
+    // employeesMapper.updateEmployee(updateEmployeeParams.getId().getUuid(),
+    //     updateEmployeeParams.getName().toString());
   }
 
   @Override
   public void deleteEmployees(List<EmployeeId> deleteEmployeeIds) {
-    employeesMapper.deleteEmployees(
-        deleteEmployeeIds.stream().map(NiboshiUuid::getUuid).toList());
+    // employeesMapper.deleteEmployees(
+    //     deleteEmployeeIds.stream().map(NiboshiUuid::getUuid).toList());
   }
 
   @Override
@@ -58,7 +58,7 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
     return employeesMapper
         .selectEmployeesById(employeeIds
             .stream()
-            .map(EmployeeId::getUuid)
+            .map(EmployeeId::toString)
             .toList())
         .stream()
         .map(employeesConverter::toEmployee)

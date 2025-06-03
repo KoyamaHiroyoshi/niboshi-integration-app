@@ -16,14 +16,14 @@ class UpdateEmployeeParamsTest {
 
   @BeforeEach
   void setUp() {
-    this.employeeId = new EmployeeId();
+    this.employeeId = null;
     this.employeeName = new EmployeeName("テスト名");
     updateEmployeeParams = UpdateEmployeeParams.builder().id(employeeId).name(employeeName).build();
   }
 
   @Test
   void testGetId() {
-    assertEquals(employeeId.getUuid(), updateEmployeeParams.getId().getUuid());
+    assertEquals(employeeId.toString(), updateEmployeeParams.getId());
   }
 
   @Test

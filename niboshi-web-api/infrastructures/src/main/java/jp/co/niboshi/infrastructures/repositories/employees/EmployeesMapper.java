@@ -1,7 +1,6 @@
 package jp.co.niboshi.infrastructures.repositories.employees;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,11 +10,11 @@ public interface EmployeesMapper {
 
   List<EmployeeEntity> selectAllEmployees();
 
-  EmployeeEntity selectEmployeeById(UUID employeeId);
+  EmployeeEntity selectEmployeeById(String employeeId);
 
-  List<EmployeeEntity> selectEmployeesById(List<UUID> employeeIds);
+  List<EmployeeEntity> selectEmployeesById(List<String> employeeIds);
 
-  void updateEmployee(UUID employeeId, String employeeName);
+  void updateEmployee(String employeeId, String employeeName);
 
-  void deleteEmployees(List<UUID> employeeIds);
+  void deleteEmployees(List<String> employeeIds);
 }

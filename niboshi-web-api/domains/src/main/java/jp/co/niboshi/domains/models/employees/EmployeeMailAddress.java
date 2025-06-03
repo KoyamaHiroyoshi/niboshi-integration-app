@@ -5,19 +5,19 @@ import java.util.Objects;
 import jp.co.niboshi.domains.models.shared.NiboshiModel;
 import jp.co.niboshi.domains.models.shared.errors.ErrorMessages;
 
-public class EmployeeId implements NiboshiModel {
+public class EmployeeMailAddress implements NiboshiModel {
   private String inner;
 
-  public EmployeeId(String employeeId) {
-    if (Objects.isNull(employeeId)) {
+  public EmployeeMailAddress(String employeeMailAddress) {
+    if (Objects.isNull(employeeMailAddress)) {
       this.throwDomainModelException(
           String.format(ErrorMessages.NULL.getMessage(), this.getModelName()));
-    } else if (employeeId.isEmpty()) {
+    } else if (employeeMailAddress.isEmpty()) {
       this.throwDomainModelException(
           String.format(ErrorMessages.EMPTY.getMessage(), this.getModelName()));
     }
 
-    this.inner = employeeId;
+    this.inner = employeeMailAddress;
   }
 
   @Override

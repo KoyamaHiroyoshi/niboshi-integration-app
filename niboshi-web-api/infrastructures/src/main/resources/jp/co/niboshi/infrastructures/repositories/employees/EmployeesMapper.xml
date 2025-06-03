@@ -9,7 +9,7 @@
   </insert>
 
   <select id="selectAllEmployees" resultType="jp.co.niboshi.infrastructures.repositories.employees.EmployeeEntity">
-    SELECT id, name FROM employees ORDER BY created_at ASC
+    SELECT id, name, mail_address FROM employees ORDER BY created_at ASC
   </select>
 
   <select id="selectEmployeeById" resultType="jp.co.niboshi.infrastructures.repositories.employees.EmployeeEntity">

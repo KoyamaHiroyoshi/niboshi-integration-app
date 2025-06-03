@@ -23,7 +23,7 @@ class EmployeeTest {
 
   @Test
   void testGetEmployeeId() {
-    assertEquals(employeeId.getUuid(), employee.getId().getUuid());
+    assertEquals(employeeId.toString(), employee.getId().toString());
   }
 
   @Test
