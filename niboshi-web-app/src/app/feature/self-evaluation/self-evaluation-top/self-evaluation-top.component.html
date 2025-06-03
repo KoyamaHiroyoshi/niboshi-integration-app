@@ -23,6 +23,7 @@
     <tr *ngFor="let employee of employees" scope="row"> <!-- ✅ `employees` が配列であることを確認 -->
       <td>{{ employee.id }}</td>
       <td>{{ employee.name }}</td>
+      <td>{{ employee.mail_address }}</td>
     </tr>
   </tbody>
 </table>
