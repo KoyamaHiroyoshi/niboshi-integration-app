@@ -54,7 +54,8 @@ public class EmployeesController implements EmployeesApi {
   @Override
   public ResponseEntity<Employee> findEmployee(String employeeId) {
     ResponseEntity<Employee> returnEntity = new ResponseEntity<>(
-        employeesConverter.toInterfaceEmployee(employeesUseCases.findEmployee(new EmployeeId(employeeId))),
+        employeesConverter
+            .toInterfaceEmployee(employeesUseCases.findEmployee(new EmployeeId(employeeId))),
         HttpStatus.OK);
     log.info(returnEntity.toString());
     return returnEntity;
@@ -67,5 +68,11 @@ public class EmployeesController implements EmployeesApi {
         .name(new EmployeeName(body.getName())).build());
 
     return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<Employee> employeesMailAddressPasswordGet(String mailAddress, String password) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'employeesMailAddressPasswordGet'");
   }
 }

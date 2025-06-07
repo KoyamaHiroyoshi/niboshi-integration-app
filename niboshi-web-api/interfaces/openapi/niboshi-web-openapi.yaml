@@ -158,6 +158,8 @@ components:
       required:
         - id
         - name
+        - mailAddress
+        - password
       properties:
         id:
           type: string
