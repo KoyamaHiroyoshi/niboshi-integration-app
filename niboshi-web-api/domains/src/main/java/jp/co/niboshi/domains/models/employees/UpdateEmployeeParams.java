@@ -20,4 +20,6 @@ public class UpdateEmployeeParams {
   private EmployeeName name;
   @NonNull
   private EmployeeMailAddress mailAddress;
+  @NonNull
+  private EmployeePassword password;
 }

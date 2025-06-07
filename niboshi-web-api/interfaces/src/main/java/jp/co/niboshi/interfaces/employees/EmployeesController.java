@@ -18,9 +18,11 @@ import jp.co.niboshi.domains.models.employees.EmployeeId;
 import jp.co.niboshi.domains.models.employees.EmployeeName;
 import jp.co.niboshi.domains.models.employees.UpdateEmployeeParams;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @AllArgsConstructor
+@Slf4j
 public class EmployeesController implements EmployeesApi {
   private final EmployeeUsecases employeesUseCases;
   private final InterfaceEmployeesConverter employeesConverter;
@@ -41,18 +43,21 @@ public class EmployeesController implements EmployeesApi {
 
   @Override
   public ResponseEntity<Employees> findAllEmployees() {
-    return new ResponseEntity<>(
+    ResponseEntity<Employees> returnEntity = new ResponseEntity<>(
         employeesConverter
             .toInterfaceFindAllEmployeesResponse(employeesUseCases.findAllEmployees()),
         HttpStatus.OK);
+    log.info(returnEntity.toString());
+    return returnEntity;
   }
 
   @Override
   public ResponseEntity<Employee> findEmployee(String employeeId) {
-    return new ResponseEntity<>(
-        employeesConverter
-            .toInterfaceEmployee(employeesUseCases.findEmployee(new EmployeeId(employeeId))),
+    ResponseEntity<Employee> returnEntity = new ResponseEntity<>(
+        employeesConverter.toInterfaceEmployee(employeesUseCases.findEmployee(new EmployeeId(employeeId))),
         HttpStatus.OK);
+    log.info(returnEntity.toString());
+    return returnEntity;
   }
 
   @Override

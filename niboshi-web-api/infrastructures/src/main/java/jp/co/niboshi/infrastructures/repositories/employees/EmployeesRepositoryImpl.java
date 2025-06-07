@@ -10,9 +10,9 @@ import jp.co.niboshi.domains.models.employees.EmployeeId;
 import jp.co.niboshi.domains.models.employees.EmployeesRepository;
 import jp.co.niboshi.domains.models.employees.UpdateEmployeeParams;
 import jp.co.niboshi.domains.models.exceptions.DomainModelException;
-import jp.co.niboshi.domains.models.shared.uuid.NiboshiUuid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 @AllArgsConstructor
 @Repository
 @Slf4j
@@ -23,9 +23,9 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
   @Override
   public void createEmployees(List<CreateEmployeeParams> createEmployeesParams) {
     // List<EmployeeEntity> newEmployees = createEmployeesParams.stream()
-    //     .map(createEmployeeParams -> new EmployeeEntity(new EmployeeId().getUuid(),
-    //         createEmployeeParams.getEmployeeName().toString()))
-    //     .toList();
+    // .map(createEmployeeParams -> new EmployeeEntity(new EmployeeId().getUuid(),
+    // createEmployeeParams.getEmployeeName().toString()))
+    // .toList();
     // employeesMapper.createEmployees(newEmployees);
   }
 
@@ -39,14 +39,15 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
   @Override
   public Employee findEmployeeById(EmployeeId employeeId) throws DomainModelException {
     log.info("findEmployeeById開始");
-    EmployeeEntity entity ;
+    EmployeeEntity entity;
     try {
       entity = employeesMapper.selectEmployeeById(employeeId.toString());
       if (entity == null) {
-          throw new Exception("該当する従業員が見つかりません: " + employeeId);
+        throw new Exception("該当する従業員が見つかりません: " + employeeId);
       }
-      
+
     } catch (Exception e) {
+      log.error("catch箇所:　" + "EmployeesRepositoryImpl.findEmployeeById");
       log.error("エラー内容：" + e.toString());
       return null;
     }
@@ -56,13 +57,13 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
   @Override
   public void updateEmployee(UpdateEmployeeParams updateEmployeeParams) {
     // employeesMapper.updateEmployee(updateEmployeeParams.getId().getUuid(),
-    //     updateEmployeeParams.getName().toString());
+    // updateEmployeeParams.getName().toString());
   }
 
   @Override
   public void deleteEmployees(List<EmployeeId> deleteEmployeeIds) {
     // employeesMapper.deleteEmployees(
-    //     deleteEmployeeIds.stream().map(NiboshiUuid::getUuid).toList());
+    // deleteEmployeeIds.stream().map(NiboshiUuid::getUuid).toList());
   }
 
   @Override
@@ -77,5 +78,5 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
         .map(employeesConverter::toEmployee)
         .toList();
   }
-  
+
 }

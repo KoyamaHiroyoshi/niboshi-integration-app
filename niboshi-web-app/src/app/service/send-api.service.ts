@@ -6,6 +6,7 @@ export interface Employee {
   id: number;
   name: string;
   mail_address: string;
+  password: string;
 }
 
 @Injectable({

@@ -18,3 +18,6 @@
 
 ### サービス作成
 - ng generate service xxxxxxxxxxx
+
+### コンソールの文字化け解消
+- chcp 65001

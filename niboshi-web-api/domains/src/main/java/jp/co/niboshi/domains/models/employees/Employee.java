@@ -19,6 +19,8 @@ public class Employee implements NiboshiModel {
   private EmployeeId id;
   @NonNull
   private EmployeeName name;
-    @NonNull
-  private EmployeeMailAddress mail_address;
+  @NonNull
+  private EmployeeMailAddress mailAddress;
+  @NonNull
+  private EmployeePassword password;
 }

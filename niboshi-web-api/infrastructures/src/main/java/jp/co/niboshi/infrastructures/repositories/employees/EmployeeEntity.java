@@ -11,5 +11,6 @@ import lombok.Getter;
 public class EmployeeEntity implements NiboshiEntity<Employee> {
   private String id;
   private String name;
-  private String mail_address;
+  private String mailAddress;
+  private String password;
 }

@@ -6,14 +6,22 @@ import org.openapitools.model.Employee;
 import org.openapitools.model.Employees;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class InterfaceEmployeesConverter {
   public Employee toInterfaceEmployee(
       jp.co.niboshi.domains.models.employees.Employee domainEmployee) {
+    log.info("Id:　" + domainEmployee.getId().toString());
+    log.info("Name:　" + domainEmployee.getName().toString());
+    log.info("MailAddress:　" + domainEmployee.getMailAddress().toString());
+    log.info("Password:　" + domainEmployee.getPassword().toString());
     Employee interfaceEmployee = new Employee();
     interfaceEmployee.setId(domainEmployee.getId().toString());
     interfaceEmployee.setName(domainEmployee.getName().toString());
-    interfaceEmployee.setMailAddress(domainEmployee.getMail_address().toString());
+    interfaceEmployee.setMailAddress(domainEmployee.getMailAddress().toString());
+    interfaceEmployee.setPassword(domainEmployee.getPassword().toString());
 
     return interfaceEmployee;
   }
