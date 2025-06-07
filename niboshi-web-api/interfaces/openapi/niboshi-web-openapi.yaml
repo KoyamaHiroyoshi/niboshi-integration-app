@@ -118,6 +118,38 @@ paths:
         "404":
           description: Employee not found
 
+  /employees/{mailAddress}/{password}:
+    get:
+      tags:
+        - employees
+      summary: ログイン確認
+      description: 指定した従業員の情報を取得する
+      # operationId: findEmployee
+      parameters:
+        - name: mailAddress
+          in: path
+          description: メールアドレス
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: path
+          description: パスワード
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employee"
+        "400":
+          description: Invalid request
+        "404":
+          description: Employee not found
+
 components:
   schemas:
     ########### 従業員関連スキーマ ###########
@@ -131,13 +163,26 @@ components:
           type: string
         name:
           type: string
+        mailAddress:
+          type: string
+        password:
+          type: string
 
     CreateEmployeeParams:
       type: object
       required:
+        - id
         - name
+        - mailAddress
+        - password
       properties:
+        id:
+          type: string
         name:
+          type: string
+        mailAddress:
+          type: string
+        password:
           type: string
 
     CreateEmployeesRequest:
