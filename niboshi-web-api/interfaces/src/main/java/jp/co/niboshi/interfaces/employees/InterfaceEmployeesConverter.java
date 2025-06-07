@@ -13,6 +13,7 @@ public class InterfaceEmployeesConverter {
     Employee interfaceEmployee = new Employee();
     interfaceEmployee.setId(domainEmployee.getId().toString());
     interfaceEmployee.setName(domainEmployee.getName().toString());
+    interfaceEmployee.setMailAddress(domainEmployee.getMail_address().toString());
 
     return interfaceEmployee;
   }

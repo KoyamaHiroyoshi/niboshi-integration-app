@@ -12,9 +12,10 @@ import jp.co.niboshi.domains.models.employees.UpdateEmployeeParams;
 import jp.co.niboshi.domains.models.exceptions.DomainModelException;
 import jp.co.niboshi.domains.models.shared.uuid.NiboshiUuid;
 import lombok.AllArgsConstructor;
-
+import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Repository
+@Slf4j
 public class EmployeesRepositoryImpl implements EmployeesRepository {
   private final EmployeesMapper employeesMapper;
   private final InfraEmployeesConverter employeesConverter;
@@ -37,7 +38,19 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
 
   @Override
   public Employee findEmployeeById(EmployeeId employeeId) throws DomainModelException {
-    return employeesConverter.toEmployee(employeesMapper.selectEmployeeById(employeeId.toString()));
+    log.info("findEmployeeById開始");
+    EmployeeEntity entity ;
+    try {
+      entity = employeesMapper.selectEmployeeById(employeeId.toString());
+      if (entity == null) {
+          throw new Exception("該当する従業員が見つかりません: " + employeeId);
+      }
+      
+    } catch (Exception e) {
+      log.error("エラー内容：" + e.toString());
+      return null;
+    }
+    return employeesConverter.toEmployee(entity);
   }
 
   @Override
@@ -64,4 +77,5 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
         .map(employeesConverter::toEmployee)
         .toList();
   }
+  
 }

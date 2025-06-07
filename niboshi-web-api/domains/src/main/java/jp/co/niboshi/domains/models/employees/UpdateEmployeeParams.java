@@ -18,4 +18,6 @@ public class UpdateEmployeeParams {
   private EmployeeId id;
   @NonNull
   private EmployeeName name;
+  @NonNull
+  private EmployeeMailAddress mailAddress;
 }
