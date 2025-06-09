@@ -15,7 +15,9 @@ import jakarta.validation.Valid;
 import jp.co.niboshi.applications.usecases.employees.EmployeeUsecases;
 import jp.co.niboshi.domains.models.employees.CreateEmployeeParams;
 import jp.co.niboshi.domains.models.employees.EmployeeId;
+import jp.co.niboshi.domains.models.employees.EmployeeMailAddress;
 import jp.co.niboshi.domains.models.employees.EmployeeName;
+import jp.co.niboshi.domains.models.employees.EmployeePassword;
 import jp.co.niboshi.domains.models.employees.UpdateEmployeeParams;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -71,8 +73,14 @@ public class EmployeesController implements EmployeesApi {
   }
 
   @Override
-  public ResponseEntity<Employee> employeesMailAddressPasswordGet(String mailAddress, String password) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'employeesMailAddressPasswordGet'");
+  public ResponseEntity<Employee> employeesMailAddressPassword(String mailAddress,
+      String password) {
+    ResponseEntity<Employee> returnEntity = new ResponseEntity<>(
+        employeesConverter
+            .toInterfaceEmployee(employeesUseCases.loginCheckEmployees(
+                new EmployeeMailAddress(mailAddress), new EmployeePassword(password))),
+        HttpStatus.OK);
+    log.info(returnEntity.toString());
+    return returnEntity;
   }
 }

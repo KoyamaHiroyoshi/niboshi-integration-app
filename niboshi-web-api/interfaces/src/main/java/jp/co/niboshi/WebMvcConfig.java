@@ -20,12 +20,22 @@ public class WebMvcConfig implements WebMvcConfigurer {
     return new NiboshiControllerLoggingInterceptor();
   }
 
-  @Override
-  public void addCorsMappings(@NonNull CorsRegistry registry) {
-    registry.addMapping("/**").allowedOrigins(niboshiCorsOrigin).allowedMethods("GET", "POST",
-        "PUT",
-        "DELETE");
-  }
+  // @Override
+  // public void addCorsMappings(@NonNull CorsRegistry registry) {
+  //   registry.addMapping("/**").allowedOrigins(niboshiCorsOrigin).allowedMethods("GET", "POST",
+  //       "PUT",
+  //       "DELETE");
+  // }
+
+@Override
+public void addCorsMappings(@NonNull CorsRegistry registry) {
+    registry.addMapping("/**")
+            .allowedOrigins("http://localhost:4200") // ✅ フロントエンドのオリジンを明示的に指定
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedHeaders("*")
+            .allowCredentials(true);
+}
+
 
   @Override
   public void addInterceptors(@NonNull InterceptorRegistry registry) {

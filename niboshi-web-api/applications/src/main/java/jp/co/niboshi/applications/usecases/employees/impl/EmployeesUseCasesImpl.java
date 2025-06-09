@@ -9,6 +9,8 @@ import jp.co.niboshi.applications.usecases.employees.EmployeeUsecases;
 import jp.co.niboshi.domains.models.employees.CreateEmployeeParams;
 import jp.co.niboshi.domains.models.employees.Employee;
 import jp.co.niboshi.domains.models.employees.EmployeeId;
+import jp.co.niboshi.domains.models.employees.EmployeeMailAddress;
+import jp.co.niboshi.domains.models.employees.EmployeePassword;
 import jp.co.niboshi.domains.models.employees.EmployeesRepository;
 import jp.co.niboshi.domains.models.employees.UpdateEmployeeParams;
 import lombok.AllArgsConstructor;
@@ -42,5 +44,10 @@ public class EmployeesUseCasesImpl implements EmployeeUsecases {
   @Override
   public void deleteEmployees(List<EmployeeId> deleteEmployeeIds) {
     employeesRepository.deleteEmployees(deleteEmployeeIds);
+  }
+
+  @Override
+  public Employee loginCheckEmployees(EmployeeMailAddress mailAddress, EmployeePassword password) {
+    return employeesRepository.findEmployeeByMailAddressAndPassword(mailAddress, password);
   }
 }

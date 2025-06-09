@@ -16,4 +16,7 @@ public interface EmployeesRepository {
   public void updateEmployee(UpdateEmployeeParams updateEmployeeParams);
 
   public void deleteEmployees(List<EmployeeId> deleteEmployeeIds);
+
+  public Employee findEmployeeByMailAddressAndPassword(EmployeeMailAddress mailAddress,
+      EmployeePassword password) throws DomainModelException;
 }

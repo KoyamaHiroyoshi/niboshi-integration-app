@@ -22,12 +22,12 @@ export class SendApiService {
   //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   //   return this.http.post(this.apiUrl, data, { headers });
   // }
-  getData(): Observable<{ employees: Employee[] }> { // ✅ 実際のAPIレスポンスの型に修正
+  getData(): Observable<{ employees: Employee[] }> { 
     return this.http.get<{ employees: Employee[] }>(this.apiUrl);
   }
 
-  loginCheck(employeeId: string): Observable<Employee> { // ✅ 直接 Employee を返すように修正
-    return this.http.get<Employee>(this.apiUrl + '/' + employeeId);
+  loginCheck(mail_address: string, password: string): Observable<Employee> { 
+    return this.http.get<Employee>(this.apiUrl + '/' + mail_address + '/' + password);
   }
 
   sendData(): Observable<any> {

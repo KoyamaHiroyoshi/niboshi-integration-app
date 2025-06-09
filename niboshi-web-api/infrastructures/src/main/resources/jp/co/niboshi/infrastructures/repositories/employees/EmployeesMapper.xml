@@ -23,6 +23,10 @@
     </foreach>
   </select>
 
+  <select id="selectEmployeeByMailAddressAndPassword" resultType="jp.co.niboshi.infrastructures.repositories.employees.EmployeeEntity">
+    SELECT id, name, mail_address,password FROM employees WHERE mail_address = #{mailAddress} AND password = #{password}
+  </select>
+
   <update id="updateEmployee">
     UPDATE employees SET name = #{employeeName} WHERE id = #{employeeId}
   </update>

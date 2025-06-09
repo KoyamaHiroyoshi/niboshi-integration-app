@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import jp.co.niboshi.domains.models.employees.CreateEmployeeParams;
 import jp.co.niboshi.domains.models.employees.Employee;
 import jp.co.niboshi.domains.models.employees.EmployeeId;
+import jp.co.niboshi.domains.models.employees.EmployeeMailAddress;
+import jp.co.niboshi.domains.models.employees.EmployeePassword;
 import jp.co.niboshi.domains.models.employees.EmployeesRepository;
 import jp.co.niboshi.domains.models.employees.UpdateEmployeeParams;
 import jp.co.niboshi.domains.models.exceptions.DomainModelException;
@@ -78,5 +80,26 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
         .map(employeesConverter::toEmployee)
         .toList();
   }
+
+  @Override
+  public Employee findEmployeeByMailAddressAndPassword(EmployeeMailAddress mailAddress,
+      EmployeePassword password) throws DomainModelException {
+    log.info("findEmployeeByMailAddressAndPassword開始 / メールアドレス：" + mailAddress + " / パスワード：" + password);
+    EmployeeEntity entity;
+    try {
+      entity = employeesMapper.selectEmployeeByMailAddressAndPassword(mailAddress.toString(),
+          password.toString());
+      if (entity == null) {
+        throw new Exception("該当する従業員が見つかりません: メールアドレス：　" + mailAddress + "パスワード：　" + password);
+      }
+
+    } catch (Exception e) {
+      log.error("catch箇所:　" + "EmployeesRepositoryImpl.findEmployeeByMailAddressAndPassword");
+      log.error("エラー内容：" + e.toString());
+      return null;
+    }
+    return employeesConverter.toEmployee(entity);
+  }
+
 
 }

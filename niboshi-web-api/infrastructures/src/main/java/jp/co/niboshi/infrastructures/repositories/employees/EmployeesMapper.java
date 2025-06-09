@@ -14,6 +14,8 @@ public interface EmployeesMapper {
 
   List<EmployeeEntity> selectEmployeesById(List<String> employeeIds);
 
+  EmployeeEntity selectEmployeeByMailAddressAndPassword(String mailAddress, String password);
+
   void updateEmployee(String employeeId, String employeeName);
 
   void deleteEmployees(List<String> employeeIds);

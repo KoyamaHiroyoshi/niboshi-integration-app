@@ -124,7 +124,7 @@ paths:
         - employees
       summary: ログイン確認
       description: 指定した従業員の情報を取得する
-      # operationId: findEmployee
+      operationId: employeesMailAddressPassword
       parameters:
         - name: mailAddress
           in: path

@@ -5,6 +5,8 @@ import java.util.List;
 import jp.co.niboshi.domains.models.employees.CreateEmployeeParams;
 import jp.co.niboshi.domains.models.employees.Employee;
 import jp.co.niboshi.domains.models.employees.EmployeeId;
+import jp.co.niboshi.domains.models.employees.EmployeeMailAddress;
+import jp.co.niboshi.domains.models.employees.EmployeePassword;
 import jp.co.niboshi.domains.models.employees.UpdateEmployeeParams;
 
 /**
@@ -41,4 +43,13 @@ public interface EmployeeUsecases {
    * @param deleteEmployeeIds
    */
   void deleteEmployees(List<EmployeeId> deleteEmployeeIds);
+
+  /**
+   * ログイン情報に紐づくユーザを取得する
+   *
+   * @param employeeId
+   * @return 従業員情報
+   */
+  Employee loginCheckEmployees(EmployeeMailAddress mailAddress, EmployeePassword password);
+
 }
