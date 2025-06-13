@@ -11,6 +11,8 @@ servers:
 tags:
   - name: employees
     description: 従業員関連API
+  - name: selfEvaluation
+    description: 自己評価関連API
 paths:
   # 従業員関連API
   /employees:
@@ -150,6 +152,33 @@ paths:
         "404":
           description: Employee not found
 
+
+  /selfEvaluation/{selfEvaluationUserId}:
+    get:
+      tags:
+        - selfEvaluation
+      summary: 自己評価取得
+      description: 指定した自己評価取得の情報を取得する
+      operationId: findSelfEvaluation
+      parameters:
+        - name: selfEvaluationUserId
+          in: path
+          description: 自己評価ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SelfEvaluation"
+        "400":
+          description: Invalid request
+        "404":
+          description: selfEvaluation not found
+
 components:
   schemas:
     ########### 従業員関連スキーマ ###########
@@ -208,3 +237,116 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Employee"
+
+    ########### 自己評価関連スキーマ ###########
+    SelfEvaluation:
+      type: object
+      required:
+        - id
+        - userId
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        question01:
+          type: string
+        question02:
+          type: string
+        question03:
+          type: string
+        question04:
+          type: string
+        question05:
+          type: string
+        question06:
+          type: string
+        question07:
+          type: string
+        question08:
+          type: string
+        question09:
+          type: string
+        question10:
+          type: string
+        question11:
+          type: string
+        question12:
+          type: string
+        question13:
+          type: string
+        question14:
+          type: string
+        question15:
+          type: string
+        question16:
+          type: string
+        question17:
+          type: string
+        question18:
+          type: string
+        question19:
+          type: string
+        question20:
+          type: string
+        question21:
+          type: string
+        question22:
+          type: string
+        question23:
+          type: string
+        question24:
+          type: string
+        question25:
+          type: string
+        question26:
+          type: string
+        question27:
+          type: string
+        question28:
+          type: string
+        question29:
+          type: string
+        question30:
+          type: string
+        question31:
+          type: string
+        question32:
+          type: string
+        question33:
+          type: string
+        question34:
+          type: string
+        question35:
+          type: string
+        question36:
+          type: string
+        question37:
+          type: string
+        question38:
+          type: string
+        question39:
+          type: string
+        question40:
+          type: string
+        question41:
+          type: string
+        question42:
+          type: string
+        question43:
+          type: string
+        question44:
+          type: string
+        question45:
+          type: string
+        question46:
+          type: string
+        question47:
+          type: string
+        question48:
+          type: string
+        question49:
+          type: string
+        question50:
+          type: string
+

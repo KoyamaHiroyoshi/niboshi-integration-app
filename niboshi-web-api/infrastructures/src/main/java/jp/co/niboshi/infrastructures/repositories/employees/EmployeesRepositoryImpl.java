@@ -84,7 +84,8 @@ public class EmployeesRepositoryImpl implements EmployeesRepository {
   @Override
   public Employee findEmployeeByMailAddressAndPassword(EmployeeMailAddress mailAddress,
       EmployeePassword password) throws DomainModelException {
-    log.info("findEmployeeByMailAddressAndPassword開始 / メールアドレス：" + mailAddress + " / パスワード：" + password);
+    log.info(
+        "findEmployeeByMailAddressAndPassword開始 / メールアドレス：" + mailAddress + " / パスワード：" + password);
     EmployeeEntity entity;
     try {
       entity = employeesMapper.selectEmployeeByMailAddressAndPassword(mailAddress.toString(),

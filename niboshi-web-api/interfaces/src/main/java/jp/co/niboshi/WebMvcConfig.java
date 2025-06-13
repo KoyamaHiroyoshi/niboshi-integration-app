@@ -22,19 +22,19 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
   // @Override
   // public void addCorsMappings(@NonNull CorsRegistry registry) {
-  //   registry.addMapping("/**").allowedOrigins(niboshiCorsOrigin).allowedMethods("GET", "POST",
-  //       "PUT",
-  //       "DELETE");
+  // registry.addMapping("/**").allowedOrigins(niboshiCorsOrigin).allowedMethods("GET", "POST",
+  // "PUT",
+  // "DELETE");
   // }
 
-@Override
-public void addCorsMappings(@NonNull CorsRegistry registry) {
+  @Override
+  public void addCorsMappings(@NonNull CorsRegistry registry) {
     registry.addMapping("/**")
-            .allowedOrigins("http://localhost:4200") // ✅ フロントエンドのオリジンを明示的に指定
-            .allowedMethods("GET", "POST", "PUT", "DELETE")
-            .allowedHeaders("*")
-            .allowCredentials(true);
-}
+        .allowedOrigins("http://localhost:4200") // ✅ フロントエンドのオリジンを明示的に指定
+        .allowedMethods("GET", "POST", "PUT", "DELETE")
+        .allowedHeaders("*")
+        .allowCredentials(true);
+  }
 
 
   @Override
